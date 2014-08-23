@@ -1,0 +1,1 @@
+cmd_drivers/video/fb.o := /media/sagformas/f8426f27-2b6a-408b-9b70-58e1b00bbb88/Proyectos/EPD/Fuentes/bq/tablets/DC/V1/curie/toolchains/arm-eabi-linaro-4.6.2/bin/arm-eabi-ld.bfd -EL    -r -o drivers/video/fb.o drivers/video/fbmem.o drivers/video/fbmon.o drivers/video/fbcmap.o drivers/video/fbsysfs.o drivers/video/modedb.o drivers/video/fbcvt.o 

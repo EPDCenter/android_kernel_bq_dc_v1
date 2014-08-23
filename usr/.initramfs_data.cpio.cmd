@@ -1,0 +1,1 @@
+cmd_usr/initramfs_data.cpio := /bin/bash /media/sagformas/f8426f27-2b6a-408b-9b70-58e1b00bbb88/Proyectos/EPD/Fuentes/bq/tablets/DC/V1/curie/kernel/scripts/gen_initramfs_list.sh -o usr/initramfs_data.cpio   -d

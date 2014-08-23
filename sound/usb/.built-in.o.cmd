@@ -1,0 +1,1 @@
+cmd_sound/usb/built-in.o :=  /media/sagformas/f8426f27-2b6a-408b-9b70-58e1b00bbb88/Proyectos/EPD/Fuentes/bq/tablets/DC/V1/curie/toolchains/arm-eabi-linaro-4.6.2/bin/arm-eabi-ld.bfd -EL    -r -o sound/usb/built-in.o sound/usb/misc/built-in.o sound/usb/usx2y/built-in.o sound/usb/caiaq/built-in.o sound/usb/6fire/built-in.o 

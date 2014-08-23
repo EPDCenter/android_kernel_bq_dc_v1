@@ -1,0 +1,1 @@
+cmd_drivers/i2c/busses/built-in.o :=  /media/sagformas/f8426f27-2b6a-408b-9b70-58e1b00bbb88/Proyectos/EPD/Fuentes/bq/tablets/DC/V1/curie/toolchains/arm-eabi-linaro-4.6.2/bin/arm-eabi-ld.bfd -EL    -r -o drivers/i2c/busses/built-in.o drivers/i2c/busses/i2c-rk30.o drivers/i2c/busses/i2c-rk29-adapter.o drivers/i2c/busses/i2c-rk30-adapter.o 

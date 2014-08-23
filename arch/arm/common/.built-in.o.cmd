@@ -1,0 +1,1 @@
+cmd_arch/arm/common/built-in.o :=  /media/sagformas/f8426f27-2b6a-408b-9b70-58e1b00bbb88/Proyectos/EPD/Fuentes/bq/tablets/DC/V1/curie/toolchains/arm-eabi-linaro-4.6.2/bin/arm-eabi-ld.bfd -EL    -r -o arch/arm/common/built-in.o arch/arm/common/gic.o arch/arm/common/pl330.o arch/arm/common/fiq_glue.o arch/arm/common/fiq_glue_setup.o arch/arm/common/fiq_debugger.o 

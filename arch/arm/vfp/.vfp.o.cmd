@@ -1,0 +1,1 @@
+cmd_arch/arm/vfp/vfp.o := /media/sagformas/f8426f27-2b6a-408b-9b70-58e1b00bbb88/Proyectos/EPD/Fuentes/bq/tablets/DC/V1/curie/toolchains/arm-eabi-linaro-4.6.2/bin/arm-eabi-ld.bfd -EL  --no-warn-mismatch   -r -o arch/arm/vfp/vfp.o arch/arm/vfp/vfpmodule.o arch/arm/vfp/entry.o arch/arm/vfp/vfphw.o arch/arm/vfp/vfpsingle.o arch/arm/vfp/vfpdouble.o 
