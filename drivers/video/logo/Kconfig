@@ -32,6 +32,13 @@ config LOGO_BLACKFIN_VGA16
 	depends on BLACKFIN
 	default y
 
+config LOGO_CURIE1_CLUT224
+    bool "E.P.D. Center Logo"
+   default y
+
+
+
+
 config LOGO_BLACKFIN_CLUT224
 	bool "224-colour Blackfin Processor Linux logo"
 	depends on BLACKFIN

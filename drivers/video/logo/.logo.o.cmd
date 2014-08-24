@@ -12,6 +12,7 @@ deps_drivers/video/logo/logo.o := \
     $(wildcard include/config/logo/superh/vga16.h) \
     $(wildcard include/config/logo/linux/clut224.h) \
     $(wildcard include/config/logo/g3/clut224.h) \
+    $(wildcard include/config/logo/curie1/clut224.h) \
     $(wildcard include/config/logo/blackfin/clut224.h) \
     $(wildcard include/config/logo/dec/clut224.h) \
     $(wildcard include/config/logo/mac/clut224.h) \
