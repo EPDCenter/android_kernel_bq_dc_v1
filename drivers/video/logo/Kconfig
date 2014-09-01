@@ -31,6 +31,13 @@ config LOGO_PIPO_CLUT224
 	bool "Standard 224-pipo Linux logo"
 	default n
 	
+
+
+config LOGO_OMNIE2_CLUT224
+    bool "OmniROM logo E2"
+   default y
+
+
 config LOGO_BLACKFIN_VGA16
 	bool "16-colour Blackfin Processor Linux logo"
 	depends on BLACKFIN
