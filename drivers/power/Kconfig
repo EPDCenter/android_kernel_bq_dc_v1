@@ -78,6 +78,11 @@ config BATTERY_RICOH619
 	  Say Y to enable support for the battery control of the Ricoh RC5T619
 	  Power Management device.
 
+config BATTERY_BT_B0BDN_3574108
+        bool "BT-BOBDN 3474108 6400mA"
+
+
+
 config TEST_POWER
 	tristate "Test power driver"
 	help
