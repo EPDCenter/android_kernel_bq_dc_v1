@@ -177,8 +177,8 @@ menuconfig MALATA_D7007
 menuconfig MALATA_D7006
 	bool "Malata D7006 Project"
 
-menuconfig MALATA_C1016
-	bool "Malata C1016 Project"
+menuconfig MALATA_C1006
+	bool "Malata C1006 Project"
 
 menuconfig MALATA_D8005
 	bool "Malata D8005 Project"
