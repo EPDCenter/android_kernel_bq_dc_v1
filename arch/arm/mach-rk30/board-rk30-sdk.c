@@ -830,7 +830,7 @@ static struct gsensor_platform_data mma7660_info = {
 };
 #endif
 /*modify the sensor orientation:hwrotation=0,fakerotation=false xmymk 20131206 */
-#if defined(CONFIG_MALATA_C1016)
+#if defined(CONFIG_MALATA_C1016) || defined(CONFIG_MALATA_C1006)
 static struct sensor_platform_data mma7660_info = {
 	.type = SENSOR_TYPE_ACCEL,
 	.irq_enable = 0,
