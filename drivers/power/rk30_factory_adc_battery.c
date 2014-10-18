@@ -46,6 +46,16 @@ extern suspend_state_t get_suspend_state(void);
 #endif
 
 static int rk30_battery_dbg_level = 0;
+static int batt_capacity99_check_count=0;
+static int batt_forced_full = 0;
+
+#endif
+#if defined(CONFIG_BATTERY_AOSBIS_CAPACITY99_CHECK)
+static int batt_capacity99_check_count=0;
+static int batt_forced_full = 0;
+#define   NUM_CHARGE_CAP99_FULL_DELAY_TIMES         ((3600 * 1000) / TIMER_MS_COUNTS)
+#endif
+
 module_param_named(dbg_level, rk30_battery_dbg_level, int, 0644);
 #define DBG( args...) \
 	do { \
