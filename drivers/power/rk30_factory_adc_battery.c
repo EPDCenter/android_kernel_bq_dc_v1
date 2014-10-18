@@ -46,16 +46,6 @@ extern suspend_state_t get_suspend_state(void);
 #endif
 
 static int rk30_battery_dbg_level = 0;
-static int batt_capacity99_check_count=0;
-static int batt_forced_full = 0;
-
-#endif
-#if defined(CONFIG_BATTERY_AOSBIS_CAPACITY99_CHECK)
-static int batt_capacity99_check_count=0;
-static int batt_forced_full = 0;
-#define   NUM_CHARGE_CAP99_FULL_DELAY_TIMES         ((3600 * 1000) / TIMER_MS_COUNTS)
-#endif
-
 module_param_named(dbg_level, rk30_battery_dbg_level, int, 0644);
 #define DBG( args...) \
 	do { \
@@ -368,16 +358,6 @@ volatile bool low_usb_charge = false;
 	extern int bq27425_init;
 #endif
 static int put_capacity_num = 0;
-
-#ifdef CONFIG_BATTERY_BQ24196_OTG_MODE
-extern int bq24196_mode;
-#endif
-
-#if defined(CONFIG_CHARGER_LIMITED_BY_TEMP)
-extern int charge_en_flags;
-extern int check_charge_ok;
-extern int update_temp_ok;
-#endif
 
 extern int dwc_vbus_status(void);
 extern int get_gadget_connect_flag(void);
@@ -857,18 +837,12 @@ static int  get_usb_status2(struct rk30_adc_battery_data *bat){
 
 //	struct rk30_adc_battery_platform_data *pdata = bat->pdata;
 	int usb_status = 0; // 0--dischage ,1 ---usb charge, 2 ---ac charge
-	int vbus_status = 0;
-	if (strstr(saved_command_line,"charger")){
-		if(is_usb_charge)
-			usb_status = 1;
-		else if(is_ac_charge)
-			usb_status = 2;
-		else
-			usb_status = 0;
+
+	if (strstr(saved_command_line,"charger"))
+	{
+		usb_status = dwc_otg_check_dpdm();
 	}else{
-		vbus_status = dwc_vbus_status();
-		if (1 == vbus_status){
-/*
+		if (1 == dwc_vbus_status()){
 			if (0 == get_gadget_connect_flag()){
 				if (++bat->gBatUsbChargeCnt >= NUM_USBCHARGE_IDENTIFY_TIMES){
 					bat->gBatUsbChargeCnt = NUM_USBCHARGE_IDENTIFY_TIMES + 1;
@@ -879,11 +853,9 @@ static int  get_usb_status2(struct rk30_adc_battery_data *bat){
 			}else{
 				usb_status = 1;	// connect to pc
 			}
-*/
-		usb_status = 1;	// connect to pc or non-standard AC charger
 		}else{
 			bat->gBatUsbChargeCnt = 0;
-			if (2 == vbus_status) {
+			if (2 == dwc_vbus_status()) {
 				usb_status = 2; //standard AC charger
 			}else{
 				usb_status = 0;
@@ -894,22 +866,11 @@ static int  get_usb_status2(struct rk30_adc_battery_data *bat){
 	return usb_status;
 }
 
-
 static int rk_battery_get_status(struct rk30_adc_battery_data *bat)
 {
 	int charge_on = 0;
 	int ac_ac_charging = 0, usb_ac_charging = 0;
 	int i=0;
-
-#ifdef CONFIG_BATTERY_BQ24196_OTG_MODE
-	if(bq24196_mode == 1)
-	{
-		bat ->charge_level = 0;
-		bat ->ac_charging = 0;
-		bat ->usb_charging = 0;
-		return 0;
-	}
-#endif
 
 #if defined (CONFIG_BATTERY_RK30_AC_CHARGE)
 	ac_ac_charging = get_ac_status(bat);
@@ -1749,12 +1710,6 @@ static int rk30_adc_battery_get_usb_property(struct power_supply *psy,
 				val->intval = bat ->usb_charging;
 //			if( (1 == bat->charge_full_flag) && (!strstr(saved_command_line,"charger")))
 //					val->intval = 0;
-#if defined(CONFIG_CHARGER_LIMITED_BY_TEMP)
-			if((1 == check_charge_ok) && (!strstr(saved_command_line,"charger")))
-				if((1 == charge_en_flags) && (1 == update_temp_ok))
-					val->intval = 0;
-#endif
-
 			DBG("%s......bat ->usb_charging=%d,bat->charge_full_flag=%d,strstr=%d\n",__func__,bat ->usb_charging,bat->charge_full_flag,(!strstr(saved_command_line,"charger")));
 			}
 			break;
@@ -1805,12 +1760,6 @@ static int rk30_adc_battery_get_ac_property(struct power_supply *psy,
 			val->intval = bat ->ac_charging;
 //			if( (1 == bat->charge_full_flag) && (!strstr(saved_command_line,"charger")))
 //				val->intval = 0;
-#if defined(CONFIG_CHARGER_LIMITED_BY_TEMP)
-		if((1 == check_charge_ok) && (!strstr(saved_command_line,"charger")))
-			if((1 == charge_en_flags) && (1 == update_temp_ok))
-				val->intval = 0;
-#endif
-
 				DBG("%s......bat ->ac_charging=%d,bat->charge_full_flag=%d,strstr=%d\n",__func__,bat ->ac_charging,bat->charge_full_flag,(!strstr(saved_command_line,"charger")));
 		}
 		break;
@@ -2067,7 +2016,7 @@ struct rk30_adc_battery_data  *bat = container_of((work), \
 	rk30_adc_battery_voltage_samples(bat);
 	rk30_adc_battery_capacity_samples(bat);
 
-	if( 1 == bat->usb_charging){  // charge
+	if( 1 == bat->charge_level){  // charge
 		if(0 == bat->status_lock ){			
 			if (!strstr(saved_command_line,"charger"))
 				wake_lock(&batt_wake_lock);  //lock
