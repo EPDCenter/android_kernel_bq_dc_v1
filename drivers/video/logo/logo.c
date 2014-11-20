@@ -71,9 +71,9 @@ const struct linux_logo * __init_refok fb_find_logo(int depth)
 #endif
 
 
-#ifdef CONFIG_LOGO_OMNIE2_CLUT224
+#ifdef CONFIG_LOGO_LE2_CLUT224
     /* Custom Linux logo */
-    logo = &logo_omnie2_clut224;
+    logo = &logo_Le2_clut224;
 #endif
 
 

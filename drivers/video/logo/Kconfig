@@ -33,8 +33,8 @@ config LOGO_PIPO_CLUT224
 	
 
 
-config LOGO_OMNIE2_CLUT224
-    bool "OmniROM logo E2"
+config LOGO_LE2_CLUT224
+    bool "Android L logo E2"
    default y
 
 

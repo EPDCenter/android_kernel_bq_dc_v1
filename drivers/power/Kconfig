@@ -78,11 +78,6 @@ config BATTERY_RICOH619
 	  Say Y to enable support for the battery control of the Ricoh RC5T619
 	  Power Management device.
 
-config BATTERY_BT_B0BDN_3574108
-        bool "BT-BOBDN 3474108 6400mA"
-
-
-
 config TEST_POWER
 	tristate "Test power driver"
 	help
@@ -114,11 +109,6 @@ config BATTERY_PMU
 	help
 	  Say Y here to expose battery information on Apple machines
 	  through the generic battery class.
-
-config BATTERY_AOSBIS_CAPACITY99_CHECK
-	bool "Support battery as full state when capacity is 99% for one hour"
-	default y
-	
 
 config BATTERY_OLPC
 	tristate "One Laptop Per Child battery"

@@ -43,7 +43,7 @@ extern const struct linux_logo logo_pipo_clut224;
 extern const struct linux_logo logo_blackfin_vga16;
 extern const struct linux_logo logo_blackfin_clut224;
 extern const struct linux_logo logo_dec_clut224;
-extern const struct linux_logo logo_omnie2_clut224;
+extern const struct linux_logo logo_Le2_clut224;
 extern const struct linux_logo logo_mac_clut224;
 extern const struct linux_logo logo_parisc_clut224;
 extern const struct linux_logo logo_sgi_clut224;
